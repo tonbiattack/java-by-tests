@@ -1,6 +1,10 @@
+/home/ubuntu/java-by-tests/examples/src/test/java/examples/exceptionhandling/DivisionTest.java
+/home/ubuntu/java-by-tests/examples/src/test/java/examples/generics/NumberTotalsTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/list/FixedListsTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/list/NumbersTest.java
+/home/ubuntu/java-by-tests/examples/src/test/java/examples/map/VisitCountsTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/optional/NicknamesTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/record/PointTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/stream/PositiveNumbersTest.java
 /home/ubuntu/java-by-tests/examples/src/test/java/examples/string/StringComparisonTest.java
+/home/ubuntu/java-by-tests/examples/src/test/java/examples/string/StringWhitespaceTest.java

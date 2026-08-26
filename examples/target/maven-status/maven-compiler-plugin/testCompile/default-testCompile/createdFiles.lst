@@ -1,6 +1,10 @@
-examples/record/PointTest.class
-examples/stream/PositiveNumbersTest.class
+examples/generics/NumberTotalsTest.class
 examples/list/NumbersTest.class
 examples/string/StringComparisonTest.class
+examples/map/VisitCountsTest.class
 examples/list/FixedListsTest.class
+examples/string/StringWhitespaceTest.class
+examples/record/PointTest.class
+examples/stream/PositiveNumbersTest.class
 examples/optional/NicknamesTest.class
+examples/exceptionhandling/DivisionTest.class

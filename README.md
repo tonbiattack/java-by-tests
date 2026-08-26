@@ -50,11 +50,10 @@ mvn -B -f examples/pom.xml test
 
 ## 新しいJavaテーマを追加する方法
 
-最初に `examples/src/main/java/` に対象コード、`examples/src/test/java/` に対応するJUnitテストを追加します。次に `src/data/lessons.ts` の `lessons` 配列へ、URLスラッグ、カテゴリ、短い説明、Javaバージョン、ふたつのファイルパス、確認事項を1件追加します。ページ側はビルド時に教材を収集するため、新しいルートを個別に実装する必要はありません。
+最初に `examples/src/main/java/` に対象コード、`examples/src/test/java/` に対応するJUnitテストを追加します。次に `src/data/lessons.ts` の `lessons` 配列へ、URLスラッグ、カテゴリ、短い説明、Javaバージョン、代表テスト名、ふたつのファイルパス、確認事項を1件追加します。ページ側はビルド時に教材を収集するため、新しいルートを個別に実装する必要はありません。
 
-追加後は必ず `mvn -B -f examples/pom.xml test` と `pnpm build` を実行してください。これにより、掲載するSource/Testと実行したコードが一致した状態を保てます。
+追加後は必ず `mvn -B -f examples/pom.xml test` と `pnpm build` を実行してください。これにより、掲載するSource/Testと実行したコードが一致した状態を保てます。検索ダイアログは、教材タイトルだけでなく、代表テスト名、カテゴリ、Javaバージョンも `lessons` のメタデータから静的に検索します。
 
 ## 参照
 
 [Astro](https://docs.astro.build/) と [GitHub PagesのGitHub Actionsによる公開](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) の公式ドキュメントを、構成・公開方法の参照先として利用しています。
-
