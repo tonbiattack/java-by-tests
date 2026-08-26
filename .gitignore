@@ -6,6 +6,10 @@
 dist/
 build/
 *.dist
+examples/target/
+
+# Session-local task tracking
+todo.md
 
 # Environment variables
 .env
