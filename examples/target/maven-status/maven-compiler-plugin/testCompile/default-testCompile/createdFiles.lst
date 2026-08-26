@@ -1,0 +1,6 @@
+examples/record/PointTest.class
+examples/stream/PositiveNumbersTest.class
+examples/list/NumbersTest.class
+examples/string/StringComparisonTest.class
+examples/list/FixedListsTest.class
+examples/optional/NicknamesTest.class
