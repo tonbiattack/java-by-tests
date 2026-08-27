@@ -10,7 +10,7 @@
 
 ## Features
 
-- Java 21とJUnit 5で検証した**26件の短い挙動確認テーマ**を掲載します。
+- Java 21とJUnit 5で検証した**29件の短い挙動確認テーマ**を掲載します。
 - SourceとTestを対で表示し、テスト名・assertionからコードの契約を読み取れます。
 - `BigDecimal`、`Integer`、`List`、`Optional`、`Stream`、例外、generics、日時などの見落としやすい差分を横断できます。
 - テーマ、タグ、テスト名、カテゴリ、Javaバージョンを対象に静的検索できます。
