@@ -42,6 +42,32 @@ const { lesson } = Astro.props;
     </section>
     <ArticleNavigation currentSlug={lesson.slug} />
   </article>
+  <script>
+    // Design system: 証明の作業台 — keyboard movement follows the visible proof-to-proof navigation.
+    const isEditing = (element: Element | null) =>
+      element?.closest("input, textarea, select, [contenteditable='true']") !== null;
+
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.defaultPrevented ||
+        event.repeat ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        isEditing(document.activeElement) ||
+        document.querySelector("dialog[open]")
+      ) {
+        return;
+      }
+
+      const selector = event.key === "ArrowLeft" ? "[data-lesson-previous]" : event.key === "ArrowRight" ? "[data-lesson-next]" : null;
+      const destination = selector ? document.querySelector<HTMLAnchorElement>(selector) : null;
+      if (!destination) return;
+
+      window.location.assign(destination.href);
+    });
+  </script>
 </BaseLayout>
 
 <style>
