@@ -98,6 +98,8 @@ pnpm verify:links
 
 **静的サイトに限定しています。** API、認証、データベースを使わずGitHub Pagesで配信できるため、教材の閲覧にアカウントや外部サービスは必要ありません。内部リンクはGitHub Pagesのサブパスを前提に生成し、CIでリンク先の静的ページを検査します。
 
+**アクセス解析の扱い。** 公開サイトにはCloudflare Web AnalyticsのBeaconを共通レイアウトに一度だけ配置しています。ページ閲覧の標準計測のみを行い、サイト内検索語、コピーしたコード、その他の利用者入力をカスタムイベントとして送信しません。
+
 ## Motivation
 
 Java APIの細かな挙動は、長い説明よりも「どの入力に何を期待し、何が実際に返る・送出されるか」を示すテストの方が速く確かめられる場面があります。Java by Testsは、その確認手順を短いSource/Testのペアとして残すために作成しました。
@@ -117,3 +119,5 @@ Java APIの細かな挙動は、長い説明よりも「どの入力に何を期
 [2] [Google Java Format](https://github.com/google/google-java-format)
 
 [3] [GitHub Pages: Custom GitHub Actions Workflows](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+
+[4] [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/)
