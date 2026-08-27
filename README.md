@@ -10,9 +10,9 @@
 
 ## Features
 
-- Java 21とJUnit 5で検証した**29件の短い挙動確認テーマ**を掲載します。
+- Java 21とJUnit 5で検証した**41件の短い挙動確認テーマ**を掲載します。
 - SourceとTestを対で表示し、テスト名・assertionからコードの契約を読み取れます。
-- `BigDecimal`、`Integer`、`List`、`Optional`、`Stream`、例外、generics、日時などの見落としやすい差分を横断できます。
+- Unicode文字列、`BigDecimal`、`List`、`Optional`、`Stream`、日時、`record`、sealed型、Concurrency、genericsなどの見落としやすい差分を横断できます。
 - テーマ、タグ、テスト名、カテゴリ、Javaバージョンを対象に静的検索できます。
 - 各教材でexpected / actual、または期待する例外型を明示し、PASS表示だけに終わらない仕様確認を行えます。
 - コードはGoogle Java Formatで整形され、デスクトップとモバイルで読みやすく折り返します。
@@ -104,7 +104,9 @@ Java APIの細かな挙動は、長い説明よりも「どの入力に何を期
 
 ## Roadmap
 
-- [ ] `HashMap`の衝突、`BigDecimal`の精度、`null`境界の設計に関する教材を追加する。
+- [x] Unicode、日時、`record`、sealed型、Concurrency、型消去を含むJavaのハマりどころを追加する。
+- [ ] `try-with-resources`で本体とcloseの両方が失敗したときのsuppressed例外を追加する。
+- [ ] `CompletableFuture`の`get`と`join`の例外型の違いを追加する。
 - [ ] 検索結果でキーボード移動と一致箇所の強調表示を提供する。
 - [ ] コードパネルに任意の行番号表示を追加する。
 
