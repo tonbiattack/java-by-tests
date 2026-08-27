@@ -1,59 +1,114 @@
 # Java by Tests
 
-**Java by Tests** は、Javaの仕様や標準APIの挙動を、長い説明ではなく **JUnit 5 テスト**で確認するための静的学習サイトです。各教材ページは常に **Source** と **Test** を対にして表示します。サイトに載るコードは `examples/` にある実ファイルをAstroのビルド時に読むため、表示とJUnitの実行コードを二重管理しません。
+**Java by Tests** は、Javaの仕様や標準APIの挙動を、読み物ではなく実行可能な **JUnit 5 テスト**から学ぶための静的ドキュメントサイトです。各テーマでSourceとTestを並べ、コードと期待する振る舞いを短時間で確かめられます。
 
-> 「Javaのこの挙動はどうだったか」を、テストメソッド名と assertion から数秒で確認する Executable Documentation を目指します。
+## Demo
 
-## 使用技術
+👉 [Live Demo](https://tonbiattack.github.io/java-by-tests/)
 
-| 区分 | 技術 | 役割 |
+## Features
+
+- Java 21とJUnit 5で検証した**10件の短い学習テーマ**を掲載します。
+- SourceとTestを対で表示し、テスト名・assertionからコードの契約を読み取れます。
+- `equals`、`isBlank`、`List`、`Map`、`Optional`、`Stream`、例外、genericsを横断できます。
+- テーマ、テスト名、カテゴリ、Javaバージョンを対象に静的検索できます。
+- コードはGoogle Java Formatで整形され、デスクトップとモバイルで読みやすく折り返します。
+- 掲載コードをMavenで実行し、GitHub Actionsでテスト・静的ビルド・リンクを検査します。
+
+## Tech Stack
+
+| 領域 | 主な技術 | 用途 |
 | --- | --- | --- |
-| サイト | Astro / TypeScript / Shiki | 静的生成、型検査、Javaコードのハイライト |
-| 実行例 | Java 21 / JUnit 5 / Maven | 掲載コードのコンパイルと挙動の検証 |
-| 自動化 | GitHub Actions / GitHub Pages | PR・mainでの検証と静的サイトの公開 |
+| Static site | Astro / TypeScript / Shiki | 静的生成、型検査、Java構文ハイライト |
+| Executable examples | Java 21 / JUnit 5 / Maven | 掲載コードのコンパイルと仕様の検証 |
+| Code style | Google Java Format | Java教材とテストの統一書式 |
+| Automation | GitHub Actions / GitHub Pages | 継続的検証と静的サイト公開 |
 
-## ローカル起動
+## Architecture
 
-Node.js 22系とJava 21、Mavenを用意したうえで、以下を実行します。
+```text
+Browser
+  ↓
+GitHub Pages
+  ↑
+Astro static build ──→ src/pages + src/components
+  ↑                         ↑
+src/data/lessons.ts ─────── examples/src/{main,test}/java
+                                  ↑
+                         Java 21 + JUnit 5 tests
+```
+
+バックエンドやデータベースは持ちません。Astroのビルド時に`examples/`の実Javaファイルを読み込み、画面に表示するSource/TestとMavenが検証するコードを同じファイルに保ちます。
+
+## Getting Started
+
+Node.js 20以降、pnpm、Java 21、Mavenを用意してください。
+
+### Install
 
 ```bash
 pnpm install
+```
+
+### Development
+
+```bash
 pnpm dev
 ```
 
-本番形式で確認する場合は、`pnpm build && pnpm preview` を実行してください。
-
-## Javaテストの実行
-
-掲載するコードと同じ `examples/` のテストを実行します。
+### Test the Java examples
 
 ```bash
 mvn -B -f examples/pom.xml test
 ```
 
-## GitHub Pagesへのデプロイ
+### Build and verify links
 
-`main` へのpush時、`deploy-pages.yml` は Maven のJUnitテスト、Astroビルド、`dist/` のGitHub Pages配置を順に実行します。最初の公開前に、GitHubリポジトリの **Settings → Pages** で公開元を **GitHub Actions** に設定してください。別の所有者またはリポジトリ名を使う場合は、`astro.config.mjs` と `src/data/lessons.ts` の `SOURCE_REPOSITORY` を更新します。
+```bash
+GITHUB_ACTIONS=true pnpm build
+pnpm verify:links
+```
 
-## ディレクトリ構成
+`GITHUB_ACTIONS=true`を付けると、GitHub Pages用の`/java-by-tests/`ベースパスでビルドできます。通常のローカル閲覧だけなら`pnpm dev`で十分です。
+
+## Project Structure
 
 ```text
 .
-├── src/                    # Astroのページ、レイアウト、コンポーネント、教材メタデータ
+├── src/
+│   ├── components/          # Source/Testパネル、ナビゲーション、検索UI
+│   ├── data/lessons.ts      # テーマのメタデータとJavaファイルの対応
+│   ├── layouts/             # 共通レイアウトと静的検索
+│   └── pages/               # ホームと教材ページの動的ルート
 ├── examples/
-│   ├── pom.xml
+│   ├── pom.xml              # Java 21 / JUnit 5のMaven設定
 │   └── src/
-│       ├── main/java/      # Sourceとして表示するJavaコード
-│       └── test/java/      # Testとして表示するJUnitコード
-└── .github/workflows/      # CIとPagesデプロイ
+│       ├── main/java/       # Sourceとして表示する実装
+│       └── test/java/       # Testとして表示するJUnitテスト
+├── scripts/verify-pages-links.mjs
+└── .github/workflows/       # 検証とGitHub Pagesデプロイ
 ```
 
-## 新しいJavaテーマを追加する方法
+## Technical Notes
 
-最初に `examples/src/main/java/` に対象コード、`examples/src/test/java/` に対応するJUnitテストを追加します。次に `src/data/lessons.ts` の `lessons` 配列へ、URLスラッグ、カテゴリ、短い説明、Javaバージョン、代表テスト名、ふたつのファイルパス、確認事項を1件追加します。ページ側はビルド時に教材を収集するため、新しいルートを個別に実装する必要はありません。
+**表示用コードを複製しません。** `lessons.ts`はテーマと実ファイルの対応だけを管理し、Astroがビルド時に`examples/`のソースとテストを取得します。このため、画面のコード、ローカルのJUnit実行、GitHub Actionsでの検証を同じ変更として扱えます。
 
-追加後は必ず `mvn -B -f examples/pom.xml test` と `pnpm build` を実行してください。これにより、掲載するSource/Testと実行したコードが一致した状態を保てます。検索ダイアログは、教材タイトルだけでなく、代表テスト名、カテゴリ、Javaバージョンも `lessons` のメタデータから静的に検索します。
+**静的サイトに限定しています。** API、認証、データベースを使わずGitHub Pagesで配信できるため、教材の閲覧にアカウントや外部サービスは必要ありません。内部リンクはGitHub Pagesのサブパスを前提に生成し、CIでリンク先の静的ページを検査します。
 
-## 参照
+## Motivation
 
-[Astro](https://docs.astro.build/) と [GitHub PagesのGitHub Actionsによる公開](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages) の公式ドキュメントを、構成・公開方法の参照先として利用しています。
+Java APIの細かな挙動は、長い説明よりも「どの入力に何を期待するか」を示すテストの方が速く確かめられる場面があります。Java by Testsは、その確認手順を短いSource/Testのペアとして残すために作成しました。
+
+## Roadmap
+
+- [ ] Javaの例外メッセージと独自例外に関する教材を追加する。
+- [ ] 検索結果でキーボード移動と一致箇所の強調表示を提供する。
+- [ ] コードパネルに任意の行番号表示を追加する。
+
+## References
+
+[1] [Astro Documentation](https://docs.astro.build/)
+
+[2] [Google Java Format](https://github.com/google/google-java-format)
+
+[3] [GitHub Pages: Custom GitHub Actions Workflows](https://docs.github.com/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
