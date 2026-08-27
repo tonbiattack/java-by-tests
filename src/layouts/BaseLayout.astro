@@ -39,13 +39,13 @@ const asset = (path: string) => `${base}${path.replace(/^\//, "")}`;
     <dialog id="search">
       <div class="search-head"><p class="eyebrow">Static index</p><button id="search-close" aria-label="閉じる">×</button></div>
       <h2>教材を検索</h2>
-      <p class="search-help">テーマ、テスト名、カテゴリ、Javaバージョンで絞り込みます。</p>
-      <input id="search-input" type="search" placeholder="例: assertThrows, Collections, Java 11" />
+      <p class="search-help">テーマ、タグ、テスト名、カテゴリ、Javaバージョンで絞り込みます。</p>
+      <input id="search-input" type="search" placeholder="例: pitfall, assertThrows, Java 11" />
       <p id="search-status" class="search-status" aria-live="polite">{lessons.length}件の教材を表示しています。</p>
       <div id="search-items">
-        {lessons.map((lesson) => <a data-search={`${lesson.title} ${lesson.oneLine} ${lesson.testName} ${lesson.section} ${lesson.version}`.toLowerCase()} href={asset(`java/${lesson.slug}`)}><span>{lesson.section} · {lesson.version}</span><strong>{lesson.title}</strong><small>@Test {lesson.testName}</small></a>)}
+        {lessons.map((lesson) => <a data-search={`${lesson.title} ${lesson.oneLine} ${lesson.testName} ${lesson.section} ${lesson.version} ${lesson.tags.join(" ")}`.toLowerCase()} href={asset(`java/${lesson.slug}`)}><span>{lesson.section} · {lesson.version}</span><strong>{lesson.title}</strong><small>@Test {lesson.testName}</small></a>)}
       </div>
-      <p id="search-empty" class="search-empty" role="status" hidden>一致する教材はありません。テーマ、テスト名、カテゴリ、Javaバージョンを変えて検索してください。</p>
+      <p id="search-empty" class="search-empty" role="status" hidden>一致する教材はありません。テーマ、タグ、テスト名、カテゴリ、Javaバージョンを変えて検索してください。</p>
     </dialog>
     <script>
       const basePrefix = document.body.dataset.basePrefix ?? "";
