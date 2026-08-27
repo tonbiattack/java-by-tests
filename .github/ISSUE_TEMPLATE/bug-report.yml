@@ -1,0 +1,64 @@
+name: 不具合の報告
+description: 教材コード、テスト、表示、リンク、CIの問題を再現可能な形で報告します。
+title: "bug: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        期待値、実際の結果、再現手順を分けて記載してください。資格情報や個人情報は貼り付けないでください。
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影響範囲
+      options:
+        - Java教材コード
+        - JUnitテスト
+        - Astro表示
+        - 検索・ナビゲーション
+        - GitHub Pages
+        - GitHub Actions
+        - ドキュメント
+    validations:
+      required: true
+  - type: input
+    id: lesson-url
+    attributes:
+      label: 関連する教材URLまたはファイルパス
+      placeholder: "例: /java/string/equals/ または examples/src/..."
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      placeholder: |
+        1. 実行したコマンドまたは操作
+        2. 使用した入力
+        3. 発生した結果
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する結果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の結果
+      description: エラー出力を含められます。トークン、接続文字列、個人情報は削除してください。
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 実行環境
+      placeholder: "Javaバージョン、Mavenバージョン、OS、ブラウザなど"
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 既存Issueを検索しました。
+          required: true
+        - label: 資格情報・個人情報・秘密値を含めていません。
+          required: true

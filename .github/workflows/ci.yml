@@ -16,8 +16,6 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - name: Run JUnit examples
-        run: mvn -B -f examples/pom.xml test
       - uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -27,7 +25,5 @@ jobs:
           cache: pnpm
       - name: Install site dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build Astro site
-        run: pnpm build
-      - name: Verify GitHub Pages links
-        run: pnpm verify:links
+      - name: Run the full quality gate
+        run: pnpm verify

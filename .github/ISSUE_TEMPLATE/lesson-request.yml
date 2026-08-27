@@ -1,0 +1,64 @@
+name: 教材テーマの提案
+description: Javaの見落としやすい挙動を、短いSource/Testの対として提案します。
+title: "lesson: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        1つのAPI・言語仕様の契約に焦点を絞り、期待値または例外を再現可能に記述してください。
+  - type: dropdown
+    id: category
+    attributes:
+      label: カテゴリ
+      options:
+        - Language
+        - Collections
+        - Numbers
+        - Functional
+        - Error Handling
+        - Generics
+        - Date / Time
+        - Concurrency
+    validations:
+      required: true
+  - type: input
+    id: java-version
+    attributes:
+      label: 対象Javaバージョン
+      placeholder: "例: Java 21"
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: 確認したい契約
+      description: どの入力に対して、どの値・例外・状態を期待するかを1〜3文で記述してください。
+      placeholder: "例: List.ofの結果へaddするとUnsupportedOperationExceptionになる。"
+    validations:
+      required: true
+  - type: textarea
+    id: minimal-example
+    attributes:
+      label: 最小再現コード
+      description: Javaコードと、期待値または例外を記載してください。外部サービス・実時刻には依存させないでください。
+      render: java
+    validations:
+      required: true
+  - type: textarea
+    id: learning-value
+    attributes:
+      label: なぜ見落としやすいか
+      description: 似たAPIや一般的な誤解との違いを説明してください。
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 確認事項
+      options:
+        - label: 1つの仕様またはAPI契約に焦点を絞っています。
+          required: true
+        - label: 正常系に加え、境界値または失敗時の挙動を説明しています。
+          required: true
+        - label: 外部資格情報、実ネットワーク、実時刻へ依存していません。
+          required: true
