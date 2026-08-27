@@ -17,6 +17,7 @@ const lessonCount = navigation.reduce((total, group) => total + group.items.leng
         <strong><span>JAVA</span><em>/</em><b>TESTS</b></strong>
       </span>
     </a>
+    <a class="language-link" href="https://tonbiattack.github.io/go-by-tests/" aria-label="Go by Testsを開く"><small>GO EDITION</small><strong>GO/<b>TESTS</b> →</strong></a>
     <nav>
       <a class:list={["root", { active: currentPath === "/" }]} href={withBase()}>Getting Started</a>
       {
@@ -145,6 +146,41 @@ const lessonCount = navigation.reduce((total, group) => total + group.items.leng
   .brand b {
     color: var(--green);
     font-weight: 700;
+  }
+
+  .language-link {
+    display: grid;
+    gap: 0.18rem;
+    margin: 1rem 0.45rem 0;
+    padding: 0.62rem 0.7rem;
+    border: 1px solid var(--line);
+    border-left: 2px solid var(--bright);
+    background: rgba(145, 177, 186, 0.045);
+    color: var(--muted);
+    transition: color 160ms var(--ease), border-color 160ms var(--ease), background 160ms var(--ease);
+  }
+
+  .language-link:hover {
+    border-color: var(--bright);
+    background: rgba(145, 177, 186, 0.1);
+    color: var(--paper);
+  }
+
+  .language-link small {
+    color: var(--dim);
+    font-family: var(--code);
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+  }
+
+  .language-link strong {
+    font-family: var(--display);
+    font-size: 0.78rem;
+    letter-spacing: 0.09em;
+  }
+
+  .language-link b {
+    color: #00add8;
   }
 
   nav {
