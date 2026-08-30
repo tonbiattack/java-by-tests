@@ -15,6 +15,7 @@
 | [TypeScript by Tests](https://github.com/tonbiattack/typescript-by-tests) | 同じ教材方針を TypeScript 5 / Node.js 22 へ移植した姉妹リポジトリ。 |
 | [TypeScript Demo](https://tonbiattack.github.io/typescript-by-tests/) | TypeScript版の実行可能な教材サイト。 |
 | [学習順のガイド](./LEARNING_PATH.md) | 関心に応じた開始地点と、Red → Green → Refactor の進め方。 |
+| [Astro 構成ガイド](./docs/ASTRO_GUIDE.md) | このサイトのビルド時処理、ブラウザ側スクリプト、フォルダの責務を実装に対応させて解説。 |
 
 ## 誰のための教材か
 
@@ -98,6 +99,8 @@ src/data/lessons.ts ─────── examples/src/{main,test}/java
 
 ## リポジトリ構成
 
+Astro が何をビルド時に処理し、どのコードだけがブラウザで動くかは、[Astro 構成ガイド](./docs/ASTRO_GUIDE.md) を参照してください。このプロジェクトには `client:*` ディレクティブはなく、静的 HTML を基本とし、検索・コピーなどの小さな操作だけを通常の `<script>` で実装しています。
+
 ```text
 .
 ├── examples/
@@ -110,6 +113,8 @@ src/data/lessons.ts ─────── examples/src/{main,test}/java
 │   ├── data/lessons.ts      # 41テーマのメタデータと実ファイルの対応
 │   ├── layouts/             # 共通レイアウトと静的検索
 │   └── pages/               # ホームと教材ページの静的ルート
+├── public/                  # 変換せず公開する静的ファイル
+├── docs/                    # 実装・運用の説明資料
 ├── .github/                 # CI、Pagesデプロイ、Issueテンプレート
 ├── LEARNING_PATH.md         # カテゴリ別の学習導線
 ├── CONTRIBUTING.md          # 教材を追加・改善するための規約
