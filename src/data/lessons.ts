@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 export type Lesson = {
   slug: string;
@@ -683,7 +684,12 @@ export const navigation = [...new Set(lessons.map((lesson) => lesson.section))].
   items: lessons.filter((lesson) => lesson.section === label),
 }));
 
-const read = (path: string) => readFileSync(new URL(`../../examples/${path}`, import.meta.url), "utf8").trim();
+/**
+ * Astro 7 ではビルド中のモジュールが dist/.prerender へ配置されるため、
+ * import.meta.url 基準では教材の正本である examples/ を指せない。
+ * pnpm スクリプトの作業ディレクトリ（リポジトリ直下）から明示的に解決する。
+ */
+const read = (path: string) => readFileSync(resolve(process.cwd(), "examples", path), "utf8").trim();
 
 export const sourceCode = (lesson: Lesson) => read(lesson.sourcePath);
 export const testCode = (lesson: Lesson) => read(lesson.testPath);
