@@ -12,19 +12,40 @@ const featuredSource = sourceCode(featured).split("\n").slice(0, 7).join("\n");
 const featuredTest = testCode(featured).split("\n").slice(0, 9).join("\n");
 ---
 
-<BaseLayout title="Javaの挙動をJUnitで確かめる" description="Java 21の挙動を、実行済みのJUnit 5テストと対になるソースコードで確認する学習サイト。">
+<BaseLayout
+  title="Javaの挙動をJUnitで確かめる"
+  description="Java 21の挙動を、実行済みのJUnit 5テストと対になるソースコードで確認する学習サイト。"
+>
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">Java 21 / JUnit 5</p>
       <h1>Javaの挙動を、<br /><em>テストで</em>確かめる。</h1>
-      <p class="lede">説明より先に、実行できる仕様を見る。Java by Tests は、Source と JUnit を並べて読むための Executable Documentation です。</p>
-      <div class="actions"><a class="primary" href={withBase(`java/${featured.slug}`)}>この検証を開く →</a><a href="#catalog">{lessons.length} lessons</a></div>
+      <p class="lede">
+        説明より先に、実行できる仕様を見る。Java by Tests は、Source と JUnit
+        を並べて読むための Executable Documentation です。
+      </p>
+      <div class="actions">
+        <a class="primary" href={withBase(`java/${featured.slug}`)}
+          >この検証を開く →</a
+        ><a href="#catalog">{lessons.length} lessons</a>
+      </div>
     </div>
-    <figure class="proof-scene" aria-label="実際のSourceとJUnitテストを並べた検証例">
+    <figure
+      class="proof-scene"
+      aria-label="実際のSourceとJUnitテストを並べた検証例"
+    >
       <div class="scene-grid"></div>
-      <div class="bench-pane source-pane"><header><small>01 / SOURCE</small><strong>{featured.sourceFile}</strong></header><pre>{featuredSource}</pre></div>
+      <div class="bench-pane source-pane">
+        <header>
+          <small>01 / SOURCE</small><strong>{featured.sourceFile}</strong>
+        </header><pre>{featuredSource}</pre>
+      </div>
       <i class="scene-trace" aria-hidden="true">✓</i>
-      <div class="bench-pane test-pane"><header><small>02 / TEST</small><strong>{featured.testFile}</strong></header><pre>{featuredTest}</pre></div>
+      <div class="bench-pane test-pane">
+        <header>
+          <small>02 / TEST</small><strong>{featured.testFile}</strong>
+        </header><pre>{featuredTest}</pre>
+      </div>
       <figcaption>OBSERVED: Source <b>→</b> Test <b>✓</b></figcaption>
     </figure>
   </section>
@@ -33,38 +54,440 @@ const featuredTest = testCode(featured).split("\n").slice(0, 9).join("\n");
     <p class="eyebrow">Observation protocol</p>
     <h2 id="protocol-title">検証は、観測結果へ戻る。</h2>
     <div>
-      {[
-        "SOURCE|確認したい最小の Java コードだけを置きます。",
-        "TEST|JUnit の assertion で、挙動をそのまま固定します。",
-        "OBSERVED|補足は短く。結果からコードへ戻るためだけに使います。",
-      ].map((item, index) => {
-        const [title, text] = item.split("|");
-        return <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{text}</p></article>;
-      })}
+      {
+        [
+          "SOURCE|確認したい最小の Java コードだけを置きます。",
+          "TEST|JUnit の assertion で、挙動をそのまま固定します。",
+          "OBSERVED|補足は短く。結果からコードへ戻るためだけに使います。",
+        ].map((item, index) => {
+          const [title, text] = item.split("|");
+          return (
+            <article>
+              <>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </>
+            </article>
+          );
+        })
+      }
     </div>
   </section>
 
   <section class="featured" aria-labelledby="first-proof-title">
-    <header><div><p class="eyebrow">First verified proof</p><h2 id="first-proof-title">{featured.title}</h2></div><VersionBadge version={featured.version} /></header>
+    <header>
+      <div>
+        <p class="eyebrow">First verified proof</p><h2 id="first-proof-title">
+          {featured.title}
+        </h2>
+      </div><VersionBadge version={featured.version} />
+    </header>
     <p class="section-lede">{featured.oneLine}</p>
-    <CodeComparison sourceFilename={featured.sourceFile} testFilename={featured.testFile} source={sourceCode(featured)} test={testCode(featured)} />
+    <CodeComparison
+      sourceFilename={featured.sourceFile}
+      testFilename={featured.testFile}
+      source={sourceCode(featured)}
+      test={testCode(featured)}
+    />
   </section>
 
   <section id="catalog" class="catalog" aria-labelledby="catalog-title">
-    <header><div><p class="eyebrow">Verified index</p><h2 id="catalog-title">まずは、{lessons.length}個の確かな挙動から。</h2></div><span>{lessonCount} / {lessonCount}</span></header>
+    <header>
+      <div>
+        <p class="eyebrow">Verified index</p><h2 id="catalog-title">
+          まずは、{lessons.length}個の確かな挙動から。
+        </h2>
+      </div><span>{lessonCount} / {lessonCount}</span>
+    </header>
     <div class="list">
-      {lessons.map((lesson, index) => <a href={withBase(`java/${lesson.slug}`)}><b>{String(index + 1).padStart(2, "0")}</b><div><small>{lesson.section}</small><h3>{lesson.title}</h3><em>@Test {lesson.testName}</em></div><p>{lesson.oneLine}</p><VersionBadge version={lesson.version} /><i>→</i></a>)}
+      {
+        lessons.map((lesson, index) => (
+          <a href={withBase(`java/${lesson.slug}`)}>
+            <>
+              <b>{String(index + 1).padStart(2, "0")}</b>
+              <div>
+                <>
+                  <small>{lesson.section}</small>
+                  <h3>{lesson.title}</h3>
+                  <em>@Test {lesson.testName}</em>
+                </>
+              </div>
+              <p>{lesson.oneLine}</p>
+              <VersionBadge version={lesson.version} />
+              <i>→</i>
+            </>
+          </a>
+        ))
+      }
     </div>
   </section>
 </BaseLayout>
 
 <style>
   /* Design system: 証明の作業台 — readable proof evidence occupies the hero; green exists only where a proof is verified. */
-  .hero,.method,.featured,.catalog{max-width:90rem;margin:0 auto;padding-right:clamp(1.25rem,4vw,4.5rem);padding-left:clamp(1.25rem,4vw,4.5rem)}
-  .hero{display:grid;grid-template-columns:minmax(0,.72fr) minmax(30rem,1.28fr);min-height:min(47rem,86vh);align-items:center;gap:clamp(2.5rem,5vw,5.5rem);padding-top:clamp(3.5rem,7vw,7rem);padding-bottom:clamp(3.5rem,7vw,7rem)}
-  h1{max-width:8.3ch;margin:1rem 0 1.25rem;font-family:var(--display);font-size:clamp(2.8rem,4.35vw,4.95rem);font-weight:600;letter-spacing:-.08em;line-height:.94}h1 em{color:var(--green);font-style:normal}.lede{max-width:32rem;color:var(--muted);font-size:.96rem}.actions{display:flex;align-items:center;gap:1.1rem;margin-top:2rem}.actions a:not(.primary){border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--code);font-size:.72rem}.primary{padding:.75rem .95rem;background:var(--green);color:#12190c;font-family:var(--display);font-size:.84rem;font-weight:700;transition:transform 160ms var(--ease),box-shadow 160ms var(--ease)}.primary:hover{box-shadow:0 .5rem 1.6rem rgba(182,240,74,.18);transform:translateY(-2px)}
-  .proof-scene{position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:30rem;margin:0;overflow:hidden;border:1px solid var(--line);background:#0b1012}.scene-grid{position:absolute;inset:0;opacity:.28;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:2rem 2rem}.bench-pane{z-index:2;margin:3rem 0 3.3rem;padding:0 1.15rem;overflow:hidden}.source-pane{border-right:1px solid var(--line)}.bench-pane header{display:flex;align-items:baseline;justify-content:space-between;gap:.65rem;padding:.65rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--code)}.bench-pane small{color:var(--dim);font-size:.55rem;letter-spacing:.1em}.bench-pane strong{font-size:.62rem;font-weight:400}.bench-pane pre{margin:1rem 0 0;white-space:pre-wrap;color:#bfccd0;font-family:var(--code);font-size:clamp(.56rem,.68vw,.7rem);line-height:1.75}.test-pane pre{color:#d2dad5}.scene-trace{position:absolute;z-index:3;top:50%;left:50%;display:grid;width:2.2rem;height:2.2rem;place-items:center;border:1px solid var(--green);border-radius:50%;background:var(--ink);color:var(--green);font-family:var(--code);font-style:normal;transform:translate(-50%,-50%)}.scene-trace:before,.scene-trace:after{position:absolute;top:50%;width:4.4rem;height:1px;background:var(--green);content:""}.scene-trace:before{right:100%}.scene-trace:after{left:100%}.proof-scene figcaption{position:absolute;z-index:2;right:1rem;bottom:.9rem;color:var(--dim);font-family:var(--code);font-size:.58rem;letter-spacing:.045em}.proof-scene figcaption b{color:var(--green)}
-  .method{padding-top:2rem;padding-bottom:6.75rem;border-top:1px solid var(--line)}h2{margin:.75rem 0 0;font-family:var(--display);font-size:clamp(1.85rem,3vw,3rem);font-weight:500;letter-spacing:-.065em;line-height:1.06}.method>div{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.6rem}.method article{position:relative;padding:1.15rem 1.25rem 1.35rem;border-top:1px solid var(--line);border-left:1px solid var(--line);background:linear-gradient(90deg,rgba(145,177,186,.045),transparent)}.method article:after{position:absolute;top:0;left:0;width:2.7rem;height:1px;background:var(--bright);content:""}.method article>span{color:var(--dim);font-family:var(--code);font-size:.7rem}.method h3{margin:1rem 0 .4rem;color:var(--paper);font-family:var(--code);font-size:.72rem;letter-spacing:.09em}.method p{margin:0;color:var(--muted);font-size:.83rem}
-  .featured{padding-bottom:6.75rem}.featured header,.catalog header{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem}.section-lede{margin:1.1rem 0 1.75rem;color:var(--muted)}.catalog{padding-top:4.5rem;padding-bottom:6rem;border-top:1px solid var(--line)}.catalog header>span{color:var(--dim);font-family:var(--code);font-size:.72rem}.list{margin-top:2.4rem;border-top:1px solid var(--line)}.list a{display:grid;grid-template-columns:2.3rem minmax(13rem,1.15fr) minmax(15rem,1fr) auto 1.25rem;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);transition:background 160ms var(--ease),padding 160ms var(--ease)}.list a:hover{padding-right:.8rem;padding-left:.8rem;background:rgba(145,177,186,.055)}.list b,.list small,.list em{font-family:var(--code)}.list b,.list small{color:var(--dim);font-size:.68rem}.list small{letter-spacing:.08em;text-transform:uppercase}.list h3{margin:.12rem 0 0;font-family:var(--display);font-size:.9rem;font-weight:500;letter-spacing:-.025em}.list em{display:block;margin-top:.22rem;color:var(--dim);font-size:.58rem;font-style:normal}.list p{margin:0;color:var(--muted);font-size:.78rem}.list i{color:var(--bright);font-family:var(--code);font-style:normal}
-  @media(max-width:960px){.hero{grid-template-columns:1fr}.proof-scene{max-width:46rem}}@media(max-width:720px){.proof-scene{grid-template-columns:1fr;min-height:unset}.bench-pane{margin:1rem 0;padding:0 1rem}.source-pane{border-right:0;border-bottom:1px solid var(--line)}.test-pane{margin-bottom:3rem}.scene-trace{top:50%;left:calc(100% - 1.5rem)}.scene-trace:before{width:2rem}.scene-trace:after{display:none}.method>div{grid-template-columns:1fr;gap:1rem}.list a{grid-template-columns:1.8rem 1fr auto;gap:.7rem}.list p,.list .badge{display:none}.hero{min-height:auto;padding-top:4rem}}@media(max-width:440px){h1{font-size:3rem}.actions{align-items:flex-start;flex-direction:column}}
+  .hero,
+  .method,
+  .featured,
+  .catalog {
+    max-width: 90rem;
+    margin: 0 auto;
+    padding-right: clamp(1.25rem, 4vw, 4.5rem);
+    padding-left: clamp(1.25rem, 4vw, 4.5rem);
+  }
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(30rem, 1.28fr);
+    min-height: min(47rem, 86vh);
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    padding-top: clamp(3.5rem, 7vw, 7rem);
+    padding-bottom: clamp(3.5rem, 7vw, 7rem);
+  }
+  h1 {
+    max-width: 8.3ch;
+    margin: 1rem 0 1.25rem;
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 4.35vw, 4.95rem);
+    font-weight: 600;
+    letter-spacing: -0.08em;
+    line-height: 0.94;
+  }
+  h1 em {
+    color: var(--green);
+    font-style: normal;
+  }
+  .lede {
+    max-width: 32rem;
+    color: var(--muted);
+    font-size: 0.96rem;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-top: 2rem;
+  }
+  .actions a:not(.primary) {
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--code);
+    font-size: 0.72rem;
+  }
+  .primary {
+    padding: 0.75rem 0.95rem;
+    background: var(--green);
+    color: #12190c;
+    font-family: var(--display);
+    font-size: 0.84rem;
+    font-weight: 700;
+    transition:
+      transform 160ms var(--ease),
+      box-shadow 160ms var(--ease);
+  }
+  .primary:hover {
+    box-shadow: 0 0.5rem 1.6rem rgba(182, 240, 74, 0.18);
+    transform: translateY(-2px);
+  }
+  .proof-scene {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 30rem;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #0b1012;
+  }
+  .scene-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.28;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+  }
+  .bench-pane {
+    z-index: 2;
+    margin: 3rem 0 3.3rem;
+    padding: 0 1.15rem;
+    overflow: hidden;
+  }
+  .source-pane {
+    border-right: 1px solid var(--line);
+  }
+  .bench-pane header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.65rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    font-family: var(--code);
+  }
+  .bench-pane small {
+    color: var(--dim);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+  .bench-pane strong {
+    font-size: 0.62rem;
+    font-weight: 400;
+  }
+  .bench-pane pre {
+    margin: 1rem 0 0;
+    white-space: pre-wrap;
+    color: #bfccd0;
+    font-family: var(--code);
+    font-size: clamp(0.56rem, 0.68vw, 0.7rem);
+    line-height: 1.75;
+  }
+  .test-pane pre {
+    color: #d2dad5;
+  }
+  .scene-trace {
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    place-items: center;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--green);
+    font-family: var(--code);
+    font-style: normal;
+    transform: translate(-50%, -50%);
+  }
+  .scene-trace:before,
+  .scene-trace:after {
+    position: absolute;
+    top: 50%;
+    width: 4.4rem;
+    height: 1px;
+    background: var(--green);
+    content: "";
+  }
+  .scene-trace:before {
+    right: 100%;
+  }
+  .scene-trace:after {
+    left: 100%;
+  }
+  .proof-scene figcaption {
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    bottom: 0.9rem;
+    color: var(--dim);
+    font-family: var(--code);
+    font-size: 0.58rem;
+    letter-spacing: 0.045em;
+  }
+  .proof-scene figcaption b {
+    color: var(--green);
+  }
+  .method {
+    padding-top: 2rem;
+    padding-bottom: 6.75rem;
+    border-top: 1px solid var(--line);
+  }
+  h2 {
+    margin: 0.75rem 0 0;
+    font-family: var(--display);
+    font-size: clamp(1.85rem, 3vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.065em;
+    line-height: 1.06;
+  }
+  .method > div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 2.6rem;
+  }
+  .method article {
+    position: relative;
+    padding: 1.15rem 1.25rem 1.35rem;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    background: linear-gradient(90deg, rgba(145, 177, 186, 0.045), transparent);
+  }
+  .method article:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.7rem;
+    height: 1px;
+    background: var(--bright);
+    content: "";
+  }
+  .method article > span {
+    color: var(--dim);
+    font-family: var(--code);
+    font-size: 0.7rem;
+  }
+  .method h3 {
+    margin: 1rem 0 0.4rem;
+    color: var(--paper);
+    font-family: var(--code);
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+  }
+  .method p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.83rem;
+  }
+  .featured {
+    padding-bottom: 6.75rem;
+  }
+  .featured header,
+  .catalog header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .section-lede {
+    margin: 1.1rem 0 1.75rem;
+    color: var(--muted);
+  }
+  .catalog {
+    padding-top: 4.5rem;
+    padding-bottom: 6rem;
+    border-top: 1px solid var(--line);
+  }
+  .catalog header > span {
+    color: var(--dim);
+    font-family: var(--code);
+    font-size: 0.72rem;
+  }
+  .list {
+    margin-top: 2.4rem;
+    border-top: 1px solid var(--line);
+  }
+  .list a {
+    display: grid;
+    grid-template-columns: 2.3rem minmax(13rem, 1.15fr) minmax(
+        15rem,
+        1fr
+      ) auto 1.25rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    transition:
+      background 160ms var(--ease),
+      padding 160ms var(--ease);
+  }
+  .list a:hover {
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+    background: rgba(145, 177, 186, 0.055);
+  }
+  .list b,
+  .list small,
+  .list em {
+    font-family: var(--code);
+  }
+  .list b,
+  .list small {
+    color: var(--dim);
+    font-size: 0.68rem;
+  }
+  .list small {
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .list h3 {
+    margin: 0.12rem 0 0;
+    font-family: var(--display);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  .list em {
+    display: block;
+    margin-top: 0.22rem;
+    color: var(--dim);
+    font-size: 0.58rem;
+    font-style: normal;
+  }
+  .list p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+  .list i {
+    color: var(--bright);
+    font-family: var(--code);
+    font-style: normal;
+  }
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .proof-scene {
+      max-width: 46rem;
+    }
+  }
+  @media (max-width: 720px) {
+    .proof-scene {
+      grid-template-columns: 1fr;
+      min-height: unset;
+    }
+    .bench-pane {
+      margin: 1rem 0;
+      padding: 0 1rem;
+    }
+    .source-pane {
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .test-pane {
+      margin-bottom: 3rem;
+    }
+    .scene-trace {
+      top: 50%;
+      left: calc(100% - 1.5rem);
+    }
+    .scene-trace:before {
+      width: 2rem;
+    }
+    .scene-trace:after {
+      display: none;
+    }
+    .method > div {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .list a {
+      grid-template-columns: 1.8rem 1fr auto;
+      gap: 0.7rem;
+    }
+    .list p,
+    .list .badge {
+      display: none;
+    }
+    .hero {
+      min-height: auto;
+      padding-top: 4rem;
+    }
+  }
+  @media (max-width: 440px) {
+    h1 {
+      font-size: 3rem;
+    }
+    .actions {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
 </style>
