@@ -16,6 +16,7 @@
 | [TypeScript Demo](https://tonbiattack.github.io/typescript-by-tests/) | TypeScript版の実行可能な教材サイト。 |
 | [学習順のガイド](./LEARNING_PATH.md) | 関心に応じた開始地点と、Red → Green → Refactor の進め方。 |
 | [Astro 構成ガイド](./docs/ASTRO_GUIDE.md) | このサイトのビルド時処理、ブラウザ側スクリプト、フォルダの責務を実装に対応させて解説。 |
+| [教材拡張ガイド](./docs/EXPANSION_GUIDE.md) | 新しいテーマを選び、Source・Test・表示をそろえて追加するための判断基準。 |
 
 ## 誰のための教材か
 
@@ -23,12 +24,12 @@ Java を書いた経験はあるものの、`String`、`List`、`Optional`、`St
 
 ## 学習マップ
 
-全 **41 テーマ**を 8 カテゴリに分けています。興味のある項目から始められますが、初めての場合は Language → Collections → Functional → Error Handling の順が読みやすい構成です。
+全 **42 テーマ**を 8 カテゴリに分けています。興味のある項目から始められますが、初めての場合は Language → Collections → Functional → Error Handling の順が読みやすい構成です。
 
 | カテゴリ | テーマ数 | まず読むテーマ | 身に付ける問い |
 |---|---:|---|---|
 | Language | 9 | [`String: == と equals`](https://tonbiattack.github.io/java-by-tests/java/string/equals/) | 値比較と参照比較をどう区別するか。 |
-| Collections | 8 | [`ArrayList: add`](https://tonbiattack.github.io/java-by-tests/java/list/add/) | 可変性、固定長ビュー、`Map` のキー契約をどう扱うか。 |
+| Collections | 9 | [`ArrayList: add`](https://tonbiattack.github.io/java-by-tests/java/list/add/) | 可変性、固定長ビュー、`Map` のキー契約、`Comparator` の等価性をどう扱うか。 |
 | Numbers | 4 | [`BigDecimal: equals と compareTo`](https://tonbiattack.github.io/java-by-tests/java/bigdecimal/equals-vs-compare-to/) | 数値の精度、scale、丸めをどう固定するか。 |
 | Functional | 9 | [`Optional: orElse`](https://tonbiattack.github.io/java-by-tests/java/optional/or-else/) | 不在、遅延評価、Stream の状態をどう表すか。 |
 | Error Handling | 3 | [`assertThrows`](https://tonbiattack.github.io/java-by-tests/java/exception/assert-throws/) | 期待する例外とリソース解放をどう契約化するか。 |
@@ -92,7 +93,7 @@ src/data/lessons.ts ─────── examples/src/{main,test}/java
 
 | 品質ゲート | 守る契約 | 自動化場所 |
 |---|---|---|
-| JUnit 5 | 全41テーマの期待値・例外・状態遷移 | Maven / GitHub Actions |
+| JUnit 5 | 全42テーマの期待値・例外・状態遷移 | Maven / GitHub Actions |
 | Astro check | 表示コンポーネントとデータ定義の型整合性 | pnpm / GitHub Actions |
 | Static build | GitHub Pagesで公開できるHTML生成 | Astro / GitHub Actions |
 | Link verification | サブパス下の内部リンクが実在すること | Node.js script / GitHub Actions |
@@ -110,7 +111,7 @@ Astro が何をビルド時に処理し、どのコードだけがブラウザ�
 │       └── test/java/       # 挙動を固定するJUnitテスト
 ├── src/
 │   ├── components/          # Source/Test パネル、目次、検索UI
-│   ├── data/lessons.ts      # 41テーマのメタデータと実ファイルの対応
+│   ├── data/lessons.ts      # 42テーマのメタデータと実ファイルの対応
 │   ├── layouts/             # 共通レイアウトと静的検索
 │   └── pages/               # ホームと教材ページの静的ルート
 ├── public/                  # 変換せず公開する静的ファイル
