@@ -677,6 +677,25 @@ export const lessons: Lesson[] = [
     tags: ["pitfall", "generics", "type-erasure", "runtime", "reflection"],
     outcome: "expected: ArrayList<String>.class == ArrayList<Integer>.class → true\nactual:   true",
   },
+  {
+    slug: "sorted-set/comparator-equivalence",
+    section: "Collections",
+    title: "TreeSet: Comparatorが0を返す値は同じ要素として扱う",
+    oneLine: "TreeSet は equals ではなく Comparator の比較結果で、要素の重複と検索を判断します。",
+    version: "Java 8+",
+    testName: "Comparatorが0を返す異なる値はTreeSetで同じ要素として扱われる",
+    sourceFile: "ComparatorEquivalence.java",
+    testFile: "ComparatorEquivalenceTest.java",
+    sourcePath: "src/main/java/examples/sortedset/ComparatorEquivalence.java",
+    testPath: "src/test/java/examples/sortedset/ComparatorEquivalenceTest.java",
+    checks: [
+      "文字列の長さだけを比較する Comparator では、同じ長さの別の文字列を重複として扱う",
+      "登録していない同じ長さの文字列も contains で見つかる",
+    ],
+    note: "TreeSet と TreeMap は compare が 0 を返すキーを同じものとして扱います。equals と異なる比較規則を使うと、集合の要素数や検索結果が直感とずれるため、Comparator の等価性を設計として明示します。",
+    tags: ["pitfall", "collections", "treeset", "comparator"],
+    outcome: "expected: [cat, java]\nactual:   [cat, java]\nexpected: contains(\"dog\") → true\nactual:   true",
+  },
 ];
 
 export const navigation = [...new Set(lessons.map((lesson) => lesson.section))].map((label) => ({
