@@ -24,18 +24,18 @@ Java を書いた経験はあるものの、`String`、`List`、`Optional`、`St
 
 ## 学習マップ
 
-全 **42 テーマ**を 8 カテゴリに分けています。興味のある項目から始められますが、初めての場合は Language → Collections → Functional → Error Handling の順が読みやすい構成です。
+全 **55 テーマ**を 8 カテゴリに分けています。興味のある項目から始められますが、初めての場合は Language → Collections → Functional → Error Handling の順が読みやすい構成です。
 
 | カテゴリ | テーマ数 | まず読むテーマ | 身に付ける問い |
 |---|---:|---|---|
-| Language | 9 | [`String: == と equals`](https://tonbiattack.github.io/java-by-tests/java/string/equals/) | 値比較と参照比較をどう区別するか。 |
-| Collections | 9 | [`ArrayList: add`](https://tonbiattack.github.io/java-by-tests/java/list/add/) | 可変性、固定長ビュー、`Map` のキー契約、`Comparator` の等価性をどう扱うか。 |
+| Language | 16 | [`String: == と equals`](https://tonbiattack.github.io/java-by-tests/java/string/equals/) | 値比較と参照比較、初期化順、overloadをどう区別するか。 |
+| Collections | 11 | [`ArrayList: add`](https://tonbiattack.github.io/java-by-tests/java/list/add/) | 可変性、共有ビュー、コピー、`Map` のキー契約、`Comparator` の等価性をどう扱うか。 |
 | Numbers | 4 | [`BigDecimal: equals と compareTo`](https://tonbiattack.github.io/java-by-tests/java/bigdecimal/equals-vs-compare-to/) | 数値の精度、scale、丸めをどう固定するか。 |
-| Functional | 9 | [`Optional: orElse`](https://tonbiattack.github.io/java-by-tests/java/optional/or-else/) | 不在、遅延評価、Stream の状態をどう表すか。 |
+| Functional | 10 | [`Optional: orElse`](https://tonbiattack.github.io/java-by-tests/java/optional/or-else/) | 不在、遅延評価、Stream の状態と重複キーをどう表すか。 |
 | Error Handling | 3 | [`assertThrows`](https://tonbiattack.github.io/java-by-tests/java/exception/assert-throws/) | 期待する例外とリソース解放をどう契約化するか。 |
 | Generics | 3 | [`? extends Number`](https://tonbiattack.github.io/java-by-tests/java/generics/extends/) | 読み書きの境界と型消去をどう考えるか。 |
 | Date / Time | 2 | [`LocalDate と LocalDateTime`](https://tonbiattack.github.io/java-by-tests/java/datetime/localdate-localdatetime/) | 日付、時刻、タイムゾーン、経過時間をどう分けるか。 |
-| Concurrency | 3 | [`CompletableFuture: join`](https://tonbiattack.github.io/java-by-tests/java/concurrency/completable-future-join/) | 非同期失敗と共有状態の制約をどう扱うか。 |
+| Concurrency | 6 | [`CompletableFuture: join`](https://tonbiattack.github.io/java-by-tests/java/concurrency/completable-future-join/) | 非同期失敗、割り込み、共有状態の制約をどう扱うか。 |
 
 各テーマの Source と Test は [Live Demo](https://tonbiattack.github.io/java-by-tests/) で確認できます。コードをローカルで実行する場合は、次の手順を使ってください。
 
@@ -93,7 +93,7 @@ src/data/lessons.ts ─────── examples/src/{main,test}/java
 
 | 品質ゲート | 守る契約 | 自動化場所 |
 |---|---|---|
-| JUnit 5 | 全42テーマの期待値・例外・状態遷移 | Maven / GitHub Actions |
+| JUnit 5 | 全55テーマの期待値・例外・状態遷移 | Maven / GitHub Actions |
 | Astro check | 表示コンポーネントとデータ定義の型整合性 | pnpm / GitHub Actions |
 | Static build | GitHub Pagesで公開できるHTML生成 | Astro / GitHub Actions |
 | Link verification | サブパス下の内部リンクが実在すること | Node.js script / GitHub Actions |
@@ -111,7 +111,7 @@ Astro が何をビルド時に処理し、どのコードだけがブラウザ�
 │       └── test/java/       # 挙動を固定するJUnitテスト
 ├── src/
 │   ├── components/          # Source/Test パネル、目次、検索UI
-│   ├── data/lessons.ts      # 42テーマのメタデータと実ファイルの対応
+│   ├── data/lessons.ts      # 55テーマのメタデータと実ファイルの対応
 │   ├── layouts/             # 共通レイアウトと静的検索
 │   └── pages/               # ホームと教材ページの静的ルート
 ├── public/                  # 変換せず公開する静的ファイル

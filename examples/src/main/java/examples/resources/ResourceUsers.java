@@ -10,4 +10,12 @@ public final class ResourceUsers {
       resource.use();
     }
   }
+
+  public static void useTwoAndCloseInReverseOrder(List<String> events) {
+    try (var first = new TrackedResource(events, "first");
+        var second = new TrackedResource(events, "second")) {
+      first.use();
+      second.use();
+    }
+  }
 }
