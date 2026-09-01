@@ -14,6 +14,8 @@
 | [Live Demo](https://tonbiattack.github.io/java-by-tests/) | ブラウザで Source と Test を対比して読む。 |
 | [TypeScript by Tests](https://github.com/tonbiattack/typescript-by-tests) | 同じ教材方針を TypeScript 5 / Node.js 22 へ移植した姉妹リポジトリ。 |
 | [TypeScript Demo](https://tonbiattack.github.io/typescript-by-tests/) | TypeScript版の実行可能な教材サイト。 |
+| [Python by Tests](https://github.com/tonbiattack/python-by-tests) | Python / pytest による姉妹リポジトリ。 |
+| [Python Demo](https://tonbiattack.github.io/python-by-tests/) | Python版の実行可能な教材サイト。 |
 | [学習順のガイド](./LEARNING_PATH.md) | 関心に応じた開始地点と、Red → Green → Refactor の進め方。 |
 | [Astro 構成ガイド](./docs/ASTRO_GUIDE.md) | このサイトのビルド時処理、ブラウザ側スクリプト、フォルダの責務を実装に対応させて解説。 |
 | [教材拡張ガイド](./docs/EXPANSION_GUIDE.md) | 新しいテーマを選び、Source・Test・表示をそろえて追加するための判断基準。 |
